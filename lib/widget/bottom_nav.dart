@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/widget/app_bar.dart';
 
 class Bottom_nav extends StatefulWidget {
   @override
@@ -31,9 +32,8 @@ class _Bottom_navState extends State<Bottom_nav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Bottom Navigator'),
-      ),
+      backgroundColor: Color.fromARGB(255, 239, 240, 240),
+      appBar: MyAppbar(),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
