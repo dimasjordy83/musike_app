@@ -31,22 +31,17 @@ class _Bottom_navState extends State<Bottom_nav> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 239, 240, 240),
-      appBar: MyAppbar(),
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        currentIndex: _currentIndex,
-        selectedItemColor: Color(0xFF112022),
-        unselectedItemColor: Color(0xFF93989D),
-        items: [
-          buildBottomNavigationBarItem(Icons.home, 'Discover', 0),
-          buildBottomNavigationBarItem(Icons.favorite, 'Liked', 1),
-          buildBottomNavigationBarItem(Icons.playlist_play, 'Playlist', 2),
-          buildBottomNavigationBarItem(Icons.settings_outlined, 'Settings', 3),
-        ],
-      ),
+    return BottomNavigationBar(
+      onTap: onTabTapped,
+      currentIndex: _currentIndex,
+      selectedItemColor: Color(0xFF112022),
+      unselectedItemColor: Color(0xFF93989D),
+      items: [
+        buildBottomNavigationBarItem(Icons.home, 'Discover', 0),
+        buildBottomNavigationBarItem(Icons.favorite, 'Liked', 1),
+        buildBottomNavigationBarItem(Icons.playlist_play, 'Playlist', 2),
+        buildBottomNavigationBarItem(Icons.settings_outlined, 'Settings', 3),
+      ],
     );
   }
 

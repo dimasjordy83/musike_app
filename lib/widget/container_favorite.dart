@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyMade extends StatelessWidget {
+class MyFavorite extends StatelessWidget {
   final List<Map<String, String>> songsingers = [
     {
       'title': 'Indonesian pops',
