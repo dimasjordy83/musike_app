@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_app/widget/bottom_nav.dart';
 import 'package:music_app/widget/container_made.dart';
 import 'package:music_app/presentation/home_Page/homepage_page.dart';
+import 'package:music_app/presentation/detail_screen/detail_page.dart';
 import 'package:music_app/widget/play_song.dart';
 
 void main() {

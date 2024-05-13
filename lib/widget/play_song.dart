@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:music_app/presentation/detail_screen/detail_page.dart';
+import 'package:music_app/presentation/detail_screen/widget/detail.dart';
 
 class PlaySong extends StatefulWidget {
   const PlaySong({super.key});
@@ -17,60 +20,71 @@ class _PlaySongState extends State<PlaySong> {
         width: MediaQuery.of(context).size.width * 0.94,
         margin: EdgeInsets.only(left: 4),
         decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 30, 211, 36),
+            color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(12))),
         child: Center(
             child: Column(children: [
           Padding(
             padding: const EdgeInsets.only(right: 8, left: 8),
-            child: Row(
-              children: [
-                Container(
-                  height: 48,
-                  width: 48,
-                  margin: EdgeInsets.only(top: 8),
-                  decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 211, 30, 30),
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8, top: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Hidup Seperti Ini',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        'James Adam',
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyDetail()),
+                );
+              },
+              child: Row(
+                children: [
+                  Container(
+                    height: 48,
+                    width: 48,
+                    margin: EdgeInsets.only(top: 8),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(12))),
+                    child:
+                        Image.asset('assets/images/img_rectangle_5_48x48.png'),
                   ),
-                ),
-                Spacer(),
-                Container(
-                    width: 24,
-                    height: 24,
-                    margin: EdgeInsets.only(right: 2),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 211, 30, 30),
-                    )),
-                Container(
-                    width: 24,
-                    height: 24,
-                    margin: EdgeInsets.only(right: 2),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 211, 30, 30),
-                    ))
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, top: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Hidup Seperti Ini',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Text(
+                          'James Adam',
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacer(),
+                  Container(
+                      width: 24,
+                      height: 24,
+                      margin: EdgeInsets.only(right: 8),
+                      child: SvgPicture.asset(
+                        'assets/images/img_settings.svg',
+                        fit: BoxFit.contain,
+                      )),
+                  Container(
+                      width: 24,
+                      height: 24,
+                      margin: EdgeInsets.only(right: 2),
+                      child: SvgPicture.asset(
+                        'assets/images/img_user.svg',
+                        fit: BoxFit.contain,
+                      ))
+                ],
+              ),
             ),
           ),
           Container(
