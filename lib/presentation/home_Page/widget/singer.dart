@@ -1,12 +1,46 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class Singer extends StatelessWidget {
-  final List<Map<String, String>> songsingers = [
-    {'singer': 'James Adam', 'img': 'assets/images/img_photo.png'},
-    {'singer': '90s hiphop mix', 'img': 'assets/images/img_photo.png'},
-    {'singer': '90s hiphop mix', 'img': 'assets/images/img_photo.png'},
-    // Tambahkan lagu lainnya di sini
-  ];
+class Singer extends StatefulWidget {
+  @override
+  _SingerState createState() => _SingerState();
+}
+
+class _SingerState extends State<Singer> {
+  List<Map<String, String>> songsingers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    // pengambilan json dari internet
+    final String url = 'https://jsonplaceholder.typicode.com/users';
+
+    try {
+      var response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        List<dynamic> users = json.decode(response.body);
+
+        setState(() {
+          songsingers = users.map((user) {
+            return {
+              'singer': user['name'].toString(), // mengubah dynamic ke String
+              'img': 'assets/images/img_photo.png', // URL gambar default
+            };
+          }).toList();
+        });
+      } else {
+        print('Gagal mengambil data: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Terjadi kesalahan: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,42 +71,48 @@ class SongCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 100,
-        height: 120,
-        padding: EdgeInsets.all(4),
-        margin: EdgeInsets.all(4),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(8))),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
-              alignment: Alignment.center, // Menengahkan widget secara vertikal
-              child: Container(
-                margin: EdgeInsets.only(top: 12),
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                ),
-                child: Image.asset(img!),
+      width: 120,
+      height: 160,
+      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: AssetImage(img!),
+                fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 12),
-            Padding(
-                padding: EdgeInsets.only(left: 8, right: 8),
-                child: Text(
-                  singer ?? '',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                )),
-            SizedBox(height: 4),
-          ],
-        ));
+          ),
+          SizedBox(height: 8),
+          Text(
+            singer ?? '',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
