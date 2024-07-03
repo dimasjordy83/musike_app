@@ -34,6 +34,8 @@ class _SingerState extends State<Singer> {
             };
           }).toList();
         });
+      } else {
+        print('Gagal mengambil data: ${response.statusCode}');
       }
     } catch (e) {
       print('Terjadi kesalahan: $e');
