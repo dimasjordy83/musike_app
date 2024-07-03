@@ -20,12 +20,18 @@ class _SingerState extends State<Singer> {
     // pengambilan json dari internet
     final String url = 'https://jsonplaceholder.typicode.com/users';
 
-  
+    try {
+      var response = await http.get(Uri.parse(url));
+ }
+    } catch (e) {
+      print('Terjadi kesalahan: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-     
     );
   }
 }
