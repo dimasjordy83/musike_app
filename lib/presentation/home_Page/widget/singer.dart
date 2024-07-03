@@ -22,7 +22,19 @@ class _SingerState extends State<Singer> {
 
     try {
       var response = await http.get(Uri.parse(url));
- }
+
+      if (response.statusCode == 200) {
+        List<dynamic> users = json.decode(response.body);
+
+        setState(() {
+          songsingers = users.map((user) {
+            return {
+              'singer': user['name'].toString(), // mengubah dynamic ke String
+              'img': 'assets/images/img_photo.png', // URL gambar default
+            };
+          }).toList();
+        });
+      }
     } catch (e) {
       print('Terjadi kesalahan: $e');
     }
