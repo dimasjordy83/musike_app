@@ -46,6 +46,14 @@ class _SingerState extends State<Singer> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
+      child: Row(
+        children: songsingers.map((song) {
+          return SongCard(
+            singer: song['singer'],
+            img: song['img'],
+          );
+        }).toList(),
+      ),
     );
   }
 }
