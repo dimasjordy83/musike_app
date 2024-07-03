@@ -8,6 +8,8 @@ class Singer extends StatefulWidget {
 }
 
 class _SingerState extends State<Singer> {
+  List<Map<String, String>> songsingers = [];
+
   @override
   void initState() {
     super.initState();
