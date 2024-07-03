@@ -16,13 +16,16 @@ class _SingerState extends State<Singer> {
     fetchData();
   }
 
+  Future<void> fetchData() async {
+    // pengambilan json dari internet
+    final String url = 'https://jsonplaceholder.typicode.com/users';
+
+  
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
-        children: songsingers.map((song) {}).toList(),
-      ),
+     
     );
   }
 }
